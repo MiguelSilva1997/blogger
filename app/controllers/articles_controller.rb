@@ -7,10 +7,13 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
     @article = Article.new()
+    @comment = Comment.new
+    @comment.article_id = @article.id
   end
 
   def create
@@ -43,7 +46,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :tag_list)
   end
 
   def set_article
